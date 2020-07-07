@@ -29,10 +29,10 @@
 				<h2>Cytoscape and Network Biology: <br /><highlight><em>an Introduction</em></highlight></h2>
 				<h5><span style="font-size: 70%">Slides: <a href="http://tutorials.cytoscape.org/#presentations-1">http://tutorials.cytoscape.org</a></span></h5>
 				<br /><br />
-				<h5 style="font-size: 60%">John "Scooter" Morris and Alex Pico</h5>
+				<h5 style="font-size: 60%">Martina Summer-Kutmon</h5>
                                 <br />
-                                <h5 style="font-size: 80%">UCSF
-                                <br/><span style="font-size: 80%">12 February 2020</span></h5>
+                                <h5 style="font-size: 80%">MaCSBio Science Days 2020
+                                <br/><span style="font-size: 80%">9 July 2020</span></h5>
 
 				<aside class="notes" data-markdown>
 				Add speaker notes here...
@@ -46,12 +46,11 @@
                     <br/><br/>
 				<ul>
 					<li>Understand the major applications of network biology</li>
-                    <li>Find relevant networks and pathways </li>
-                    <li>Import your data into Cytoscape</li>
-                    <li>Perform basic topological and other network analyses</li>
-                    <li>Master network layouts and data visualization</li>
-                    <li>Know where to find relevant Cytoscape apps and tutorials</li>
-
+					<li>Find relevant networks and pathways </li>
+					<li>Import your data into Cytoscape</li>
+					<li>Perform basic topological and other network analyses</li>
+					<li>Master network layouts and data visualization</li>
+					<li>Know where to find relevant Cytoscape apps and tutorials</li>
 				</ul>
 
 				<aside class="notes" data-markdown>
@@ -62,11 +61,9 @@
 				<!-- Define upto 5 Ribbons per slide to compose links to a set of modules -->
 				<section>
 				<a href="#" class="navigate-next"><ribbon>Introductions and Concepts</ribbon></a>
-				<a href="#/guided-tour"><ribbon>Guided Tour of Cytoscape</ribbon></a>
 				<a href="#/network-taxonomy"><ribbon>Finding Network Data</ribbon></a>
 				<a href="#/network-analysis" ><ribbon>Network Analysis and Viz</ribbon></a>
 				<a href="#/hands-on" ><ribbon>Hands-on Exercises</ribbon></a>
-				<a href="#/your-data" ><ribbon>Working with Your Data</ribbon></a>
 
 				<aside class="notes" data-markdown>
 				Add speaker notes here...
@@ -77,31 +74,19 @@
 				<section>
 				<section>
 				<h1>Introductions</h1>
-					<highlight>John "Scooter" Morris, UCSF</highlight><br />
+					<highlight>Martina Summer-Kutmon, PhD</highlight><br />
 					<ul>
-						<li>Executive director, Resource for Biocomputing, Visualization, and Informatics</li>
-						<li>Roving Engineer, National Resource for Network Biology</li>
-						<li>Cytoscape team since 2006</li>
-						<li>Author of over a dozen Cytoscape apps</li>
+						<li>Assistant professor</li>
+						<li>Maastricht Centre for Systems Biology (MaCSBio)</li>
+						<li>Department of Bioinformatics (BiGCaT)</li>
+						<li>Network biologist, methods and tool development</li>
+						<li>Architect of the WikiPathways project</li>
+						<li>Developer of several Cytoscape apps</li>
 					</ul> 
 				<aside class="notes" data-markdown>
 				Add speaker notes here...
 				</aside>
 				</section>
-
-                                <section>
-                                <h1>Introductions</h1>
-                                        <highlight>Alex Pico, Gladstone Institutes</highlight><br />
-                                        <ul>
-                                                <li>Associate director, Bioinformatics Core</li>
-                                                <li>Executive director, National Resource for Network Biology</li>
-                                                <li>Cytoscape team since 2006</li>
-                                                <li>Author of a handful of Cytoscape apps and RCy3</li>
-                                        </ul>
-                                <aside class="notes" data-markdown>
-                                Add speaker notes here...
-                                </aside>
-                                </section>
 
 				<!-- Don't forget to survey who your audience is! -->
 				<section>
@@ -137,69 +122,12 @@
 				<section id="intro-network-biology" data-external="modules/intro-network-biology/module.html"></section>
 				<section id="intro-cytoscape" data-external="modules/intro-cytoscape/module.html"></section>
                 
-                <!-- How to launch guided tour -->
-                <section id="guided-tour">
-                    <section>
-                    <h1>Tour of Cytoscape</h1>
-                    <img style="width:60%;"  src="modules/intro-cytoscape/launch.png"/>
-                        <br />
-                    <ol>
-	                   <li>Launch the latest version of Cytoscape</li>
-                    </ol>
-                    <aside class="notes" data-markdown>
-                     When you launch Cytoscape, the Starter Panel will open with some example session files to choose from. 
-                    </aside>
-                </section>
-                <section>
-                    <h1>Tour of Cytoscape</h1>
-                    <img style="width:30%;"  src="modules/intro-cytoscape/open-cybrowser.png"/>
-                    <img style="width:60%;margin-left: 40px"  src="modules/intro-cytoscape/open-tutorials.png"/>
-                        <br />
-                    <ol start="2">
-	                    <li>Open CyBrowser</li>
-                        <li>Enter URL: tutorials.cytoscape.org</li>
-                    </ol>
-                    <aside class="notes" data-markdown>
-                        Add speaker notes here...
-                    </aside>
-                </section>
-                    <section>
-                    <h1>Tour of Cytoscape</h1>
-                    <img style="width:50%;"  src="modules/intro-cytoscape/tutorials.png"/>
-                    <img style="width:49%;"  src="modules/intro-cytoscape/tour-start.png"/>
-                        <br />
-                    <ol start="4">
-	                   <li>Click on <b>Tour of Cytoscape</b></li>
-                        <li>Resize window to your preference</li>
-                    </ol>
-                    <aside class="notes" data-markdown>
-                        Add speaker notes here...
-                    </aside>
-                		</section>
-
-                    <section>
-                    <h1>Tour of Cytoscape</h1>
-										<p><highlight>Follow-along walkthrough:</highlight></p>
-										<ol>
-											<li>Loading networks</li>
-											<li>Loading tables</li>
-											<li>Selection and filtering</li>
-											<li>Changing visual attributes</li>
-											<li>Exporting images</li>
-											<li>Saving sessions</li>
-										</ol>
-										</section>
-
-                 </section>
-                
 				<!-- Overview update slide -->
 				<section>
 				<a class="inactive"><ribbon>Introductions and Concepts</ribbon></a>
-				<a class="inactive"><ribbon>Guided Tour of Cytoscape</ribbon></a>
 				<a href="#/network-taxonomy"><ribbon>Finding Network Data</ribbon></a>
 				<a href="#/network-analysis" ><ribbon>Network Analysis and Viz</ribbon></a>
 				<a href="#/hands-on" ><ribbon>Hands-on Exercises</ribbon></a>
-				<a href="#/your-data" ><ribbon>Working with Your Data</ribbon></a>
 				<aside class="notes" data-markdown>
 				2:10
 				Add speaker notes here...
@@ -213,11 +141,9 @@
 				<!-- Overview update slide -->
 				<section>
 				<a class="inactive"><ribbon>Introductions and Concepts</ribbon></a>
-				<a class="inactive"><ribbon>Guided Tour of Cytoscape</ribbon></a>
 				<a class="inactive"><ribbon>Finding Network Data</ribbon></a>
 				<a href="#/network-analysis" ><ribbon>Network Analysis and Viz</ribbon></a>
 				<a href="#/hands-on"><ribbon>Hands-on Exercises</ribbon></a>
-				<a href="#/your-data"><ribbon>Working with Your Data</ribbon></a>
 				<aside class="notes" data-markdown>
 				2:50
 				Add speaker notes here...
@@ -231,11 +157,9 @@
 				<!-- Overview update slide -->
 				<section>
 				<a class="inactive"><ribbon>Introductions and Concepts</ribbon></a>
-				<a class="inactive"><ribbon>Guided Tour of Cytoscape</ribbon></a>
 				<a class="inactive"><ribbon>Finding Network Data</ribbon></a>
 				<a class="inactive" ><ribbon>Network Analysis and Viz</ribbon></a>
 				<a href="#/hands-on"><ribbon>Hands-on Exercises</ribbon></a>
-				<a href="#/your-data"><ribbon>Working with Your Data</ribbon></a>
 				<aside class="notes" data-markdown>
 				3:15
 				Add speaker notes here...
@@ -263,26 +187,9 @@
 
 				<section>
 				<a class="inactive"><ribbon>Introductions and Concepts</ribbon></a>
-				<a class="inactive"><ribbon>Guided Tour of Cytoscape</ribbon></a>
 				<a class="inactive"><ribbon>Finding Network Data</ribbon></a>
 				<a class="inactive" ><ribbon>Network Analysis and Viz</ribbon></a>
 				<a class="inactive" href="http://tutorials.cytoscape.org" target="_blank"><ribbon>Hands-on Exercises</ribbon></a>
-				<a href="#/your-data"><ribbon>Working with Your Data</ribbon></a>
-				</section>
-
-				<section id="your-data">
-					<h1>Working with Your Data</h1>
-					<p>Take the rest of the time to use Cytoscape on your own data, or
-					one of the datasets below, and
-					to put into practice what you've just learned</p>
-					<p><highlight>Please ask questions!</highlight></p>
-					<br/><br/>
-					<p style="font-size: 80%">Datasets to play with:
-					<ul style="margin-left:-18em;font-size: 80%">
-						<li><a href="https://www.cgl.ucsf.edu/home/scooter/combined_scores.txt">Proteomics data set</a></li>
-						<li><a href="https://www.cgl.ucsf.edu/home/scooter/GPL51.txt">Transcriptomics data set</a></li>
-					</ul>
-					</p>
 				</section>
 
 				<!-- Wrap up with helpful links -->
