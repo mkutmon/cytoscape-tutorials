@@ -51,19 +51,13 @@
                 
 <section id="background">
 <h1>Experimental Data</h1>
-    <p>For this tutorial, we will use a dataset comparing transcriptomic differences between autistic and normal brain. The study has been published in <a href="https://europepmc.org/article/MED/21614001">Voineagu et al.</a>, and we will get a summarized dataset with fold change and p-value from the EBI Gene Expression Atlas.</p> 
-    
-    <ul>
-        <li>Download the data: <a href="https://www.ebi.ac.uk/gxa/experiments-content/E-GEOD-30573/resources/ExperimentDownloadSupplier.BulkDifferential/tsv">Transcriptomic analysis of autistic brain reveals convergent molecular pathology</a>.</li>
-        <li>To open the tsv datafile in Excel, first launch Excel and open a blank workbook. Next, go to <highlight>Data &rarr; Get External Data &rarr; Import Text File...</highlight>.</li>
-        <li>In the import wizard, select <b>Delimited</b> and in the next step select <b>Tab</b>.</li>
-        <li>In the third step, you can select the <b>Data Format</b> for every column. The file has 4 columns of data: <b>Gene ID</b>, <b>Gene Name</b>, <b>fold change</b> and <b>p-value</b>. <b>Make sure to change the format for the second column, Gene Name, to Text.</b> You will have to scroll to the right to see the second column. Click <b>Finish</b> to complete the import.</li>
-    </ul>
+    <p>For this tutorial, we will use a dataset comparing transcriptomic differences between autistic and normal brain. The study has been published in <a href="https://europepmc.org/article/MED/21614001">Voineagu et al.</a>, and we will get a summarized dataset with fold change and p-value from the EBI Gene Expression Atlas.
+    Download the data here: <a href="https://cytoscape.org/cytoscape-tutorials/protocols/rna-seq-data-analysis/rna-seq-data-cytoscape.csv">Transcriptomic analysis of autistic brain reveals convergent molecular pathology</a>.</p> 
     
 <!--    <img class="plain" src="excel-data.png" style="height:300px">-->
 </section>
-                
-<section id="de-genes">
+
+<!--<section id="de-genes">
     <h1>Differentially Expressed Genes</h1>
     <p>We are going to define a set of up-regulated genes from the full dataset by filtering for fold change and p-value.</p>
     <ul>
@@ -73,7 +67,7 @@
         <li>With the filter active, select and copy all entries in the <b>Gene Name</b> column.</li>
     </ul><br /><br />
   <img class="plain" src="excel-filter.png" style="height:400px">               
-</section>
+</section>-->
                 
 <!--<section id="intro1">
     <h1>Network Retrieval</h1>
@@ -87,9 +81,10 @@
                 
 <section id="intro2">
     <h1>Retrieve Networks from STRING</h1>
-    <p>To identify a relevant network, we will use the STRING database to find a network relevant to the list of up-regulated genes.</p>
+    <p>To identify a relevant network, we will use the STRING database to find a network relevant to the list of up- and down-regulated genes.</p>
     <ul>
-        <li>Launch Cytoscape. In the <highlight>Network Search</highlight> bar at the top of the <highlight>Network Panel</highlight>, select <highlight>STRING protein query</highlight> from the drop-down, and paste in the list of 263 up-regulated genes.</li>
+	<li>Open the example data file, <b>rna-seq-data-cytoscape.csv</b>, in a spreadsheet app and select all gene names, from the <b>Gene Names</b> column. This represents all significantly up- and down-regulated genes.</li>
+        <li>Launch Cytoscape. In the <highlight>Network Search</highlight> bar at the top of the <highlight>Network Panel</highlight>, select <highlight>STRING protein query</highlight> from the drop-down, and paste in the list of genes.</li>
         <li>Open the options panel <img class="plain" src="string-options.png" style="height:30px"> and confirm you are searching <b>Homo sapiens</b> with a <b>Confidence cutoff</b> of <b>0.40</b> and <b>0 Maximum additional interactors</b>.</li>
         <li>Click the search icon <img class="plain" src="SearchIcon.png" style="height:30px"> to search. If any of the search terms are ambiguous, a <highlight>Resolve Ambiguous Terms</highlight> dialog will appear. Click <highlight>Import</highlight> to continue with the import using the default choices. The resulting network will load automatically, and should have around 173 nodes.</li>
     </ul>    <br /><br />
@@ -104,13 +99,13 @@
                 
 <!--<section>-->
 <section id="string-result-up">
-<h1>STRING Network Up-Regulated Genes</h1>
-    <p>The resulting network contains up-regulated genes recognized by STRING, and interactions between them with an confidence score of 0.4 or greater.</p>
+<h1>STRING Network Regulated Genes</h1>
+    <p>The resulting network contains up- and down-regulated genes recognized by STRING, and interactions between them with an confidence score of 0.4 or greater.</p>
     <img class="plain" src="string-up.png" style="height:650px">
 </section>
     
 <section id="string-up-sub">
-<h1>STRING Network Up-Regulated Genes</h1>
+<h1>STRING Network Regulated Genes</h1>
     <p>The networks consists of one large connected component, several smaller networks, and some unconnected nodes. We will use only the largest connected component for the rest of the tutorial.</p>
     <ul>
     <li>To select the largest connected component, select <highlight>Select &rarr; Nodes &rarr; Largest subnetwork</highlight>.</li>
@@ -133,7 +128,7 @@
     <h1>Data Integration</h1>
     <p>Next we will import the RNA-Seq data and use them to create a visualization.</p>
     <ul>
-    <li>Load the downloaded <b>E-GEOD-30573-query-results.tsv</b> file under <highlight>File</highlight> menu by selecting <highlight>Import &rarr; Table from File....</highlight>. Alternatively, drag and drop the data file directly onto the <highlight>Node Table</highlight>.</li>
+    <li>Load the downloaded <b>rna-seq-data-cytoscape.csv</b> file under <highlight>File</highlight> menu by selecting <highlight>Import &rarr; Table from File....</highlight>. Alternatively, drag and drop the data file directly onto the <highlight>Node Table</highlight>.</li>
     <li>In <highlight>Advanced Options...</highlight>, in the <highlight>Ignore Lines Starting With</highlight> field, enter <b>#</b>, to exclude the additional lines at the beginning of the data file.</li>
 	<li>Select the <b>query term</b> column as the <b>Key column for Network</b> and select the <b>Gene Name</b> column as the key column by clicking on the header and selecting the key symbol.</li>
     <li>Click <highlight>OK</highlight> to import. Two new columns of data will be added to the <highlight>Node Table</highlight>.</li>
@@ -162,8 +157,8 @@
 <section>
     <h1>Visualization</h1>
     <ul>
-        <li>For node <highlight>Fill Color</highlight>, create a continuous mapping for <highlight>'autism' vs 'normal' .foldChange</highlight>.</li>
-        <li>Double-cllick the color mapping to open the <highlight>Continuous Mapping Editor</highlight> and click the <highlight>Current Palette</highlight>. Select the ColorBrewer <b>yellow-orange-red shades</b> gradient.</li>
+        <li>For node <highlight>Fill Color</highlight>, create a continuous mapping for <highlight>Fold Change</highlight>. Keep the default red-blue color palette.</li>
+        <!-- <li>Double-cllick the color mapping to open the <highlight>Continuous Mapping Editor</highlight> and click the <highlight>Current Palette</highlight>. Select the ColorBrewer <b>yellow-orange-red shades</b> gradient.</li> -->
         <li>Finally, for node <highlight>Label</highlight>, set a passthrough mapping for <highlight>display name</highlight>.</li>
         <li>Save your new visualization under <highlight>Copy Style...</highlight> in the <highlight>Options</highlight> menu of the <highlight>Style</highlight> interface, and name it <b>de genes up</b>.</li>
     </ul>
@@ -174,7 +169,7 @@
 <section id="ex1-up-visualization2">
      <h1>Visualization</h1>
         <p>Apply the <highlight>Prefuse Force Directed</highlight> layout by clicking the <highlight>Apply Preferred Layout</highlight> <img class="plain" src="layout.png" style="height:30px"> button in the toolbar. The network will now look something like this:</p>
-	    <img class="plain" src="string-up-viz.png" style="height:650px">   
+	    <img class="plain" src="string-changed-viz.png" style="height:650px">   
 </section>
                 
 <section id="string-enrich1-up">
@@ -204,7 +199,7 @@
 	<li>Explore custom settings via <img class="plain" src="SettingsIcon.png" style="height:30px"> in the top right of the STRING enrichment tab.</li>
     </ul>
     <br /><br />
-<img class="plain" src="string-enrichment-chart-up.png" style="height:400px">    
+<img class="plain" src="string-enrichment-chart.png" style="height:400px">    
 </section>
                                                
 <!--<section id="ex1-down-string">
