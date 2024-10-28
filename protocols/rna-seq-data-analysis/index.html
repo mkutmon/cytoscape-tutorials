@@ -51,8 +51,12 @@
                 
 <section id="background">
 <h1>Experimental Data</h1>
-    <p>For this tutorial, we will use a dataset comparing transcriptomic differences between autistic and normal brain. The study has been published in <a href="https://europepmc.org/article/MED/21614001">Voineagu et al.</a>, and we will get a summarized dataset with fold change and p-value from the EBI Gene Expression Atlas.
-    Download the data here: <a href="https://cytoscape.org/cytoscape-tutorials/protocols/rna-seq-data-analysis/rna-seq-data-cytoscape.csv">rna-seq-data-cytoscape.csv</a>.</p> 
+    <p>For this tutorial, we will use a dataset comparing transcriptomic differences between autistic and normal brain. The study has been published in <a href="https://europepmc.org/article/MED/21614001">Voineagu et al.</a>, and we will get a summarized dataset with fold change and p-value from the EBI Gene Expression Atlas.</p>
+    <ul>
+        <li>
+        Download the data here: <a href="https://cytoscape.org/cytoscape-tutorials/protocols/rna-seq-data-analysis/rna-seq-data-cytoscape.csv">rna-seq-data-cytoscape.csv</a>.
+        </li>
+    </ul>
     
 <!--    <img class="plain" src="excel-data.png" style="height:300px">-->
 </section>
@@ -128,12 +132,10 @@
     <p>Next we will import the RNA-Seq data and use them to create a visualization.</p>
     <ul>
     <li>Load the downloaded <b>rna-seq-data-cytoscape.csv</b> file under <highlight>File</highlight> menu by selecting <highlight>Import &rarr; Table from File....</highlight>. Alternatively, drag and drop the data file directly onto the <highlight>Node Table</highlight>.</li>
-    <li>For the Select the <b>Key column for Network</b> choose <b>query term</b> to match the gene names in the sample dataset.</li>
+    <li>For the <b>Key column for Network</b> choose <b>query term</b> to match the gene names in the sample dataset.</li>
     <li>Click <highlight>OK</highlight> to import. Two new columns of data will be added to the <highlight>Node Table</highlight>.</li>
-</ul><br /><br />
-	<div style="width:43%;float:right">
-		<img class="plain" src="data-import.png" />
-	</div>
+</ul>
+	<img class="plain" src="data-import.png"  style="width:500px" />
 </section>
     
 <section id="visualization1-up">
