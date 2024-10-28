@@ -52,7 +52,7 @@
 <section id="background">
 <h1>Experimental Data</h1>
     <p>For this tutorial, we will use a dataset comparing transcriptomic differences between autistic and normal brain. The study has been published in <a href="https://europepmc.org/article/MED/21614001">Voineagu et al.</a>, and we will get a summarized dataset with fold change and p-value from the EBI Gene Expression Atlas.
-    Download the data here: <a href="https://cytoscape.org/cytoscape-tutorials/protocols/rna-seq-data-analysis/rna-seq-data-cytoscape.csv">Transcriptomic analysis of autistic brain reveals convergent molecular pathology</a>.</p> 
+    Download the data here: <a href="https://cytoscape.org/cytoscape-tutorials/protocols/rna-seq-data-analysis/rna-seq-data-cytoscape.csv">rna-seq-data-cytoscape.csv</a>.</p> 
     
 <!--    <img class="plain" src="excel-data.png" style="height:300px">-->
 </section>
@@ -85,8 +85,7 @@
     <ul>
 	<li>Open the example data file, <b>rna-seq-data-cytoscape.csv</b>, in a spreadsheet app and select all gene names, from the <b>Gene Names</b> column. This represents all significantly up- and down-regulated genes.</li>
         <li>Launch Cytoscape. In the <highlight>Network Search</highlight> bar at the top of the <highlight>Network Panel</highlight>, select <highlight>STRING protein query</highlight> from the drop-down, and paste in the list of genes.</li>
-        <li>Open the options panel <img class="plain" src="string-options.png" style="height:30px"> and confirm you are searching <b>Homo sapiens</b> with a <b>Confidence cutoff</b> of <b>0.40</b> and <b>0 Maximum additional interactors</b>.</li>
-        <li>Click the search icon <img class="plain" src="SearchIcon.png" style="height:30px"> to search. If any of the search terms are ambiguous, a <highlight>Resolve Ambiguous Terms</highlight> dialog will appear. Click <highlight>Import</highlight> to continue with the import using the default choices. The resulting network will load automatically, and should have around 150 nodes.</li>
+        <li>Click the search icon <img class="plain" src="SearchIcon.png" style="height:30px"> to search. The resulting network will load automatically, and should have around 150 nodes.</li>
     </ul><br />
     <img class="plain" src="string-search.png" style="width:400px">               
 <!--<div style="width:40%;float:left">
@@ -129,12 +128,9 @@
     <p>Next we will import the RNA-Seq data and use them to create a visualization.</p>
     <ul>
     <li>Load the downloaded <b>rna-seq-data-cytoscape.csv</b> file under <highlight>File</highlight> menu by selecting <highlight>Import &rarr; Table from File....</highlight>. Alternatively, drag and drop the data file directly onto the <highlight>Node Table</highlight>.</li>
-    <li>Select the <b>query term</b> column as the <b>Key column for Network</b> and select the <b>Gene Name</b> column as the key column by clicking on the header and selecting the key symbol.</li>
+    <li>For the Select the <b>Key column for Network</b> choose <b>query term</b> to match the gene names in the sample dataset.</li>
     <li>Click <highlight>OK</highlight> to import. Two new columns of data will be added to the <highlight>Node Table</highlight>.</li>
 </ul><br /><br />
-    <div style="width:38%;float:left">
-		<img class="plain" src="import-advanced.png" />
-	</div>
 	<div style="width:43%;float:right">
 		<img class="plain" src="data-import.png" />
 	</div>
@@ -145,23 +141,22 @@
     <p>Next, we will create a visualization of the imported data on the network. For more detailed information on data visualization, see the <a href="https://cytoscape.github.io/cytoscape-tutorials/protocols/mapping-data/#/">Visualizing Data</a> tutorial.</p>   
     <ul>
     <li>In the <highlight>Style</highlight> tab of the <highlight>Control Panel</highlight>, switch the style from <b>STRING</b> style to <b>default</b> in the drop-down at the top.</li>
-    <li>Change the default node <highlight>Shape</highlight> to <b>ellipse</b> and check <highlight>Lock node width and height</highlight>.</li>
-    <li>Set the default node <highlight>Size</highlight> to <b>50</b>.</li>
-    <li>Set the default node <highlight>Fill Color</highlight> to light gray.</li>
-    <li>Set the default <highlight>Border Width</highlight> to <b>2</b>, and make the default <highlight>Border Paint</highlight> dark gray.</li>
-	</ul>
-    <img class="plain" src="style-viz1.png" style="height:450px">
+    <li>Copy the style to customize your own visualization via <highlight>Copy Style...</highlight> in the <highlight>Options</highlight> menu of the <highlight>Style</highlight> interface, and name it <b>de genes</b>.</li>
+    </ul>
+    <img class="plain" src="style-viz2.png" style="width:500px">
 </section>     
                 
 <section>
     <h1>Visualization</h1>
     <ul>
-        <li>For node <highlight>Fill Color</highlight>, create a continuous mapping for <highlight>Fold Change</highlight>. Keep the default red-blue color palette.</li>
+    <li>Change the default node <highlight>Shape</highlight> to <b>ellipse</b> and check <highlight>Lock node width and height</highlight>.</li>
+    <li>Set the default node <highlight>Size</highlight> to <b>50</b>.</li>
+    <li>For node <highlight>Label</highlight>, set a passthrough mapping for <highlight>display name</highlight>.</li>
+    <li>Set the default node <highlight>Fill Color</highlight> to light gray.</li>
+	<li>For node <highlight>Fill Color</highlight> mapping, choose column: <highlight>Fold Change</highlight> and mapping type: <highlight>continuous</highlight>. Keep the default red-blue color palette.</li>
         <!-- <li>Double-cllick the color mapping to open the <highlight>Continuous Mapping Editor</highlight> and click the <highlight>Current Palette</highlight>. Select the ColorBrewer <b>yellow-orange-red shades</b> gradient.</li> -->
-        <li>Finally, for node <highlight>Label</highlight>, set a passthrough mapping for <highlight>display name</highlight>.</li>
-        <li>Save your new visualization under <highlight>Copy Style...</highlight> in the <highlight>Options</highlight> menu of the <highlight>Style</highlight> interface, and name it <b>de genes</b>.</li>
     </ul>
-    <img class="plain" src="style-viz2.png" style="height:450px">
+    <img class="plain" src="style-viz1.png" style="height:450px">
       
 </section>
     
