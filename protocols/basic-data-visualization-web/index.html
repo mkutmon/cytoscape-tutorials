@@ -1,0 +1,406 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Basic Data Visualization in Cytoscape Web</title>
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/cytoscape-protocol-1.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                
+<!-- ========================================================== -->
+<!-- THIS IS WHERE YOUR CONTENT BEGINS -->
+<section>
+    <h1>Basic Data Visualization in Cytscape Web</h1>
+    <p><highlight>Cytoscape Web is a web-based version of Cytoscape that supports modern computing environments without the need for software installation.
+        Cytoscape Web enables efficient integration, visualization, and analysis of data in the context of networks.</highlight></p>
+
+    <p>This tutorial presents a scenario of how expression data and network data can be combined to tell a biological story and includes these concepts:</p>
+        <ul>
+            <li>Visualizing networks using expression data.</li>
+            <li>Assessing expression data in the context of a biological network.</li>
+        </ul>
+<div class="footer" style="bottom: -5em;">
+<a href="https://github.com/cytoscape/cytoscape-tutorials/wiki"><img class="plain" src="../../assets/images/cytoscape-tutorials.png" style="height:70px;opacity:0.5"></a>
+</div>
+</section>
+
+<section>
+	<h1>Loading Network</h1>
+        <ul>
+				<div style="width:40%;float:right; margin-left: 10px">
+					<img class="plain" src="BasicDataVizDemoLoaded.png">
+				</div>
+        <li>Navigate to <a href="https://web-stage.cytoscape.org/" target="_blank">Cytoscape Web</a>.</li>
+		<li>We will use <a href="https://www.ndexbio.org/index.html#/" target="_blank">NDEx</a> to find a relevant network. Select <highlight>Data &rarr; Open Network(s) from NDEx...</highlight>. In the <highlight>Search NDEx</highlight> field, type in "GAL1 GAL4 GAL80" (without the quotes).</li>
+		<li>In the search results, find the <b>galFiltered network with data</b>. Click on the network to select it, and click the <highlight>OPEN 1 NETWORK</highlight> button on the bottom right.</li>
+		<li>The network will open with the default style, similar to the network on the right:</li>
+		</ul>
+    
+<p>To learn more about <b>importing networks from local files</b>, see the <a href="https://cytoscape.github.io/cytoscape-tutorials/protocols/loading-networks/#/0/13" target="_blank">Loading Networks Tutorial</a>.</p>
+
+		<aside class="notes" data-markdown>
+		Add speaker notes here...
+		</aside>
+	</section>
+
+
+	<section>
+		<h1>Visualizing Expression Data on Networks</h1>
+		<p>Probably the most common use of expression data in Cytoscape is to set the <b>visual properties</b> of the nodes (color, shape, border) in a network according to expression data. This creates a powerful visualization, portraying functional relation and experimental response at the same time. Here, we will show an example of doing this.</p>
+		<p>The data used in this example is from yeast, and represents an experiment of perturbations of the genes <b>GAL1</b>, <b>GAL4</b>, and <b>GAL80</b>, which are all yeast transcription factors.
+            
+		<aside class="notes" data-markdown>
+Add speaker notes here...
+		</aside>
+	</section>
+
+    
+	<section>
+        <h1>Visualizing Expression Data on Networks</h1>
+        <p>For this tutorial, the experimental data was part of the Cytoscape network file you loaded earlier, and is visible in the <highlight>NODES</highlight> tab of the <highlight>Table Panel</highlight>:</p>
+        <img class="plain" src="galfiltered-nodetable.png" style="width:41%">
+		<ul>
+            <li>Selecting nodes in the network (Shift + Click-and-Drag or Command + Click-and-Drag) will update the <highlight>Table Panel</highlight> to show only data for those nodes.</li>
+			<li>Similarly, you can click on rows to select them, or Shift + Click (or Command + Click) on multiple rows, and then click the <highlight>SELECT NODES</highlight> button to highlight the corresponding nodes in the network.</li>
+		</ul>
+		<p>To learn more about <b>importing data</b>, see the <a href="https://cytoscape-web.readthedocs.io/en/latest/Node_and_Edge_Column_Data.html#import-data-table-files" target="_blank">Importing Data Table Files</a> in the Cytoscape Web manual.</p>
+
+		<aside class="notes" data-markdown>
+		Add speaker notes here...
+		</aside>
+	</section>
+
+    <section>
+        <h1>Visualizing Expression Data on Networks</h1>
+		<p>We can now use the data to manipulate the visual properties of the network by mapping specific data columns to visual style properties:</p>
+		<ul>
+			<li>The <b>gal80Rexp</b> expression values will be mapped to <highlight>Node Fill Color</highlight>; nodes with low expression will be colored blue, nodes with high expression will be colored red.</li>
+			<li>Significance of expression values, <b>gal80Rsig</b>, will be mapped to <highlight>Node Border Width</highlight>; nodes with significant changes will appear with a thicker border.</li>
+		</ul>
+	</section>
+
+        <section>
+	<h1>Set Node Fill Color</h1>
+    <ul>
+    <li>Click on the <highlight>STYLE</highlight> tab in the <highlight>Control Panel</highlight> on the left.</li>
+    <li>Find <highlight>Fill Color</highlight> in the list of properties in the <highlight>NODE</highlight> tab and click on the <highlight>Mapping</highlight> column.</li>
+	<li>In the <highlight>Column</highlight> pulldown, select <b>gal80Rexp</b>.</li>
+	<li>In the <highlight>Mapping Type</highlight> pulldown, select <highlight>continuous</highlight>.</li>
+    <li>This produces a default <b>ColorBrewer</b> gradient ranging from blue to red for expression values. For our purposes, this gradient works so we don't need to edit it. Click anywhere in browser window to exit the <highlight>Fill Color Mapping</highlight> interface.</li>
+    </ul>
+    <img class="plain" src="NodeFillMapping.png" style="width:40%">      
+         
+    <p>To learn more about <b>changing node color</b>, see the <a href="https://cytoscape-web.readthedocs.io/en/latest/Styles.html" target="_blank">Styles Tutorial</a>.</p>
+            
+        <aside class="notes" data-markdown>
+            Add speaker notes here...
+        </aside>
+    </section>
+                
+    <section>
+        <h1>Set Node Fill Color</h1>
+        <p>The nodes in the network are now colored based on the <b>gal80RExp</b> data column:</p>
+        
+    <img class="plain" src="NodeFillColor.png" style="width:50%">      
+    </section>
+
+    <section>
+	<h1>Set Default Node Color</h1>
+	<p>Some nodes in the network don't have any data, and for those nodes, the default color applies. In our case, the default color is blue, which falls within the spectrum of our blue-red gradient. This is not ideal for data visualization, so a useful trick is to choose a color outside the gradient spectrum to distinguish nodes with no defined expression value.</p>
+    <ul>
+    <li>Still in the <highlight>STYLE</highlight> tab, under <highlight>Node Fill Color</highlight>, click the <highlight>Default</highlight> column of the <highlight>Fill Color</highlight> property.</li>
+    <li>Click a light grey color tile in a color palette. Click <highlight>CONFIRM</highlight>.</li>
+    </ul>
+    <br /><br />
+    <!--<div style="float:left; width:45%">
+<img class="plain" src="ColorChooser.png">
+</div>-->
+<div>
+<img class="plain" src="NodeFillDefaultMapping.png" style="width:45%">
+</div>      
+    </section>
+                
+    <section>
+	<h1>Set Default Node Color</h1>
+        <p>Note that at least one node in the network is now colored grey:</p>
+        <img class="plain" src="NodeFillColorDefault.png" style="width:50%"> 
+    </section>
+
+    <section>
+    <h1>Set Node Border Width</h1>
+        <ul>
+            <li>In the <highlight>NODE</highlight> tab of the <highlight>Style</highlight> panel, click on the <highlight>Mapping</highlight> column for the <highlight>Border Width</highlight> property.</li>
+            <li>In the <highlight>Column</highlight> pulldown, select <b>gal80Rsig</b>.</li>
+            <li>In the <highlight>Mapping Type</highlight> pulldown, select <highlight>continuous</highlight>.</li>
+            <li>First, we will define the min/max of the range of p values we are interested in, that is anything under 0.05. Click the <highlight>SET MIN AND MAX</highlight> button and set the set the max to <b>0.05</b>. Click <highlight>CONFIRM</highlight>.</li>
+            <li>Click on the handle for the max value and set the value to <b>5</b> in the <highlight>Border Width</highlight> field. Click <highlight>CONFIRM</highlight>. Repeat with the handle for the min value.
+            <li>We have now defined the Node Border Width <i>between</i> 0 and 0.05, but we also need to define the values <i>above</i> this range. Click on the box to the right of the graph, and set the value to 1. Click <highlight>CONFIRM</highlight>.</li>
+            <li>Click the <highlight>Default</highlight> column for <highlight>Border Paint</highlight> and select a dark grey color.</li>
+        </ul>
+        <img class="plain" src="NodeBorderGradient.png" style="width:35%">
+    </section>
+    
+    <section>
+    <h1>Set Node Border Color</h1>
+        <ul>
+            <li>Click on the <highlight>Mapping</highlight> column for the <highlight>Node Border Paint</highlight> property.</li>
+            <li>In the <highlight>Column</highlight> pulldown, select <b>gal80Rsig</b>.</li>
+            <li>In the <highlight>Mapping Type</highlight> pulldown, select <highlight>continuous</highlight>.</li>
+            <li>Similar to the last step, we will define the min/max of the range of p values we are interested in, that is anything under 0.05. Click on <highlight>SET MIN AND MAX</highlight> button and set the max to <b>0.05</b>. Click <highlight>CONFIRM</highlight>.</li>
+            <li>Click on the box to the right of the gradient. This defines the border color for nodes with <b>gal80Rsig</b> > 0.05, so let's set it to dark grey.</li>
+            <li>Next, set all the other handles to the same dark red color.</li>
+        </ul>
+        <img class="plain" src="NodeBorderColor.png" style="width:38%">
+    </section>
+                
+    <section>
+        <h1>Set Node Border Width</h1>
+        <p>All nodes with a <b>gal80RSig</b> p-value of 0.05 or less will now have a thicker red border:</p>
+                
+        <img class="plain" src="NodeBorderWidth.png" style="width:50%"> 
+    </section>
+                
+    <section>
+        <h1>Set Node Label</h1>
+        <p>The network nodes are by default labeled with yeast ORF identifiers. We can change the label to something more readible, like the gene symbol.</p>
+        <li>For the <highlight>Node Label</highlight> property, click on the <highlight>Mapping</highlight> column and update the selected column in the <highlight>Column</highlight> pulldown to <b>COMMON</b>.</li>
+        <br /><br />
+        <img class="plain" src="NodeLabel.png" style="width:50%">        
+    </section>
+                
+    <section>
+        <h1>Set Node Label</h1>
+        <p>Zoom in to see the updated labels:</p>
+        
+        <img class="plain" src="NodeLabelViz.png" style="width:50%">
+    </section>
+                
+    <!--<section>
+        <h1>Set the Node Table Style</h1>
+        <p>In addition to creating a visualization for the network, you can also add a style to the <highlight>Node Table</highlight>. The <highlight>Column</highlight> tab of the <highlight>Style</highlight> interface has default and mapping style options for a set of table cell attributes.</p>
+        <ul>
+        <li>Next, we can add the column we want to style. Click the plus sign, and in the dialog select <b>Node</b> in the <highlight>Table</highlight> drop-down. Also select the <b>gal80Rexp</b> column from the <highlight>Column</highlight> drop-down.</li>
+        <li>In the mapping column of <highlight>Cell Background Paint</highlight> select the <b>gal80Rexp</b> column and select a default red-blue continuous mapping.</li>
+        </ul>
+        
+        <img class="plain" src="TableStylePanel.png" style="width:28%">
+    </section>
+                
+    <section>
+        <h1>Set the Node Table Style</h1>
+        <p>The background of the cells in the <b>gal80RExp</b> column is now colored in the same way that the nodes in the network are colored:</p>
+        
+        <img class="plain" src="TableStylePanelViz.png" style="width:50%">
+                
+    </section>
+                
+    <section>
+        <h1>Creating the Legend</h1>
+        <p>The Cytoscape app <b>Legend Creator</b> allows you to create a customized legend for your visualization. You can install Legend Creator from the <a href="http://apps.cytoscape.org/apps/legendcreator">App Store</a>.</p>
+        <ul>
+            <li>In the <highlight>Control Panel</highlight>, go to the <highlight>Legend Panel</highlight>. This is the interface for the <b>Legend Creator</b> app, and will list multiple options for creating a legend.</li>
+            <li>Note that the two attributes that we used for mapping, <b>gal80Rexp</b> and <b>gal80Rsig</b>, are selected by default. For our purposes this is actually what we want. Click <highlight>Refresh Legend</highlight> to continue. The legend will appear in the lower left of the network view.</li>
+        </ul><br /><br />
+        <img class="plain" src="LegendPanel.png" style="width:40%">
+</section>
+
+            
+    <section>
+        <h1>Moving a Legend</h1>
+        <ul>
+            <li>To move the legend, first click the <highlight>Toggle Annotation Selection</highlight> icon <img class="plain" src="AnnotationSelection.png"> at the bottom of the <highlight>Network View Window</highlight>. You can now move the legend like you would any object, for example by click and drag.</li><br /><br />
+        </ul>
+        <img class="plain" src="NetworkLegend.png" style="width:60%">
+        <p>To learn more about <b>creating legends</b>, see the <a href="https://cytoscape.github.io/cytoscape-tutorials/protocols/legend-creator/#/" target="_blank">Legend Creator</a>.</p>
+                
+    </section>-->
+                
+
+	<section>
+    <h1>Layouts</h1>
+        <p>An important aspect of network visualization is the layout, meaning the positioning of nodes and edges. Our network had a preset layout in the original file you imported, but this can be changed.</p>
+        <ul>
+            <li>Let's change the layout to a force-directed layout by selecting <highlight>Layout &rarr; G6: gForce</highlight>.</li>
+            <li>The settings for any layout algorithm can be updated under <highlight>Layout &rarr; Settings...</highlight>. To make the network easier to interpret, let's update the <highlight>nodeStrength</highlight> parameter to 1500. Click <highlight>APPLY LAYOUT</highlight>.</li>
+        </ul>
+        
+        <aside class="notes" data-markdown>
+		Add speaker notes here...
+		</aside>
+	</section>
+
+	<!--<section>
+		<h1>Filtering Nodes</h1>
+        <p>Cytoscape allows you to easily filter and select nodes and edges based on data attributes. Next, we will select a subset of nodes with high expression in the gal80 knockout:</p>
+				<ul>
+					<li>Go to the <highlight>Filter</highlight> tab in the <highlight>Control Panel</highlight>.</li>
+					<li>Click on the <highlight>+</highlight> button and select <highlight>Column Filter</highlight>.</li>
+					<li>Under <highlight>Choose column...</highlight>, select <highlight>Node: gal80Rexp</highlight>. Notice how all the nodes in the network are selected at first.</li>
+					<li>Using the slider or the input fields, specify values of <b>2</b> or higher by changing the minimum value to 2.</li>
+				</ul>
+			<p>You should now see only a few nodes in the network selected, highlighted yellow.</p>
+        <br />
+        <p>To learn more about <b>filtering and selection</b>, see the <a href="https://cytoscape.github.io/cytoscape-tutorials/protocols/filtering-by-selection/#/" target="_blank">Filtering by Selection Tutorial</a>.</p>
+        
+		<aside class="notes" data-markdown>
+		Add speaker notes here...
+		</aside>
+	</section>
+
+	<section>	
+        <h1>Expand Selection and Create New Network</h1>
+        <p>We have now selected only the few top expressing nodes. To see the context of these nodes in the larger network, we can expand the selection of nodes to include the nodes connecting to the selected nodes, i.e. the first neighbors. Once we have that larger selection, we can create a new network.</p>
+        <ul>
+            <li>Select the first neighbors of selected nodes by clicking the <highlight>First Neighbors of Selected Nodes &rarr; Undirected</highlight> button <img class="plain" src="FirstNeighborsButton.png"> in the toolbar.</li>
+            <li>To expand the selection to second-degree nodes, repeat the last step of clicking the <highlight>First Neighbors of Selected Nodes &rarr; Undirected</highlight> button <img class="plain" src="FirstNeighborsButton.png"> again.</li>
+            <li>Create a new network from the current selection by clicking the <highlight>New Network From Selection</highlight> button <img class="plain" src="NewNetworkFromSelectionButton.png"> in the toolbar and choosing <highlight>New Network From Selected Nodes, All edges</highlight>.</li>
+            <li>Click on the <highlight>Preferred Layout</highlight> button <img class="plain" src="PreferredLayoutButton.png"> in the toolbar to apply a force-directed layout.</li> 
+                
+        </ul>
+
+		<aside class="notes" data-markdown>
+		Add speaker notes here...
+		</aside>
+	</section>
+
+<section>
+    <p>Your new network will look similar to this:</p>
+    <img class="plain" src="FinalNetwork.png" style="width:45%">
+</section>
+-->
+<!--<section>
+	<h1>Exploring Nodes</h1>
+	<ul>
+		<li>Right-click on any node (for example GAL4).</li>
+		<li>Select the menu <highlight>External Links &rarr; Sequences and Proteins → Ensembl Gene View → yeast</highlight>.</li>
+		<li>This will launch a <highlight>Cytoscape Web Browser</highlight> window showing the Ensembl database entry for <b>YPL248C</b>, the name of the node.</li>
+	</ul>
+	<aside class="notes" data-markdown>
+	Add speaker notes here...
+	</aside>
+</section>-->
+
+<section>
+    <h1>Interpretation</h1>
+    <p>Let's explore one of the perturbed transcription factors in more detail; GAL4.</p>
+    <ul>
+        <li>To find the GAL4 node in the network, search for it in the search box in the upper right.</li>
+        <li>Manually zoom in on the network surrounding the GAL4 node. You can scroll to zoom or click and drag to pan.</li>
+    </ul>
+    <br /><br />
+    <img class="plain" src="GAL4-network.png" style="width:30%">
+</section>
+                
+<section>
+    <h1>Interpretation</h1>
+	<p>Digging into the biology of this network, it turns out that <b>GAL4</b> is repressed by <b>GAL80</b>. Both <b>GAL4</b> and <b>GAL11 </b> show fairly small changes in expression, and neither change is statistically significant: they are pale blue with thin borders. These slight changes in expression suggest that the critical change affecting the red nodes might be somewhere else in the network, and not either of these nodes. GAL4 interacts with GAL80, which shows a significant level of repression: it is medium blue with a thicker border.
+	<p>Note that while <b>GAL80</b> shows evidence of significant repression, most nodes interacting with <b>GAL4</b> show significant levels of induction: they are rendered as red rectangles. GAL11 is a general transcription co-factor with many interactions.</p>
+	<p>Putting all of this together, we see that the <b><i>transcriptional activation activity of Gal4 is repressed by Gal80</i></b>. So, repression of Gal80 increases the transcriptional activation activity of Gal4. Even though the expression of Gal4 itself did not change much, <b><i>the Gal4 transcripts were much more likely to be active transcription factors when Gal80 was repressed</i></b>. This explains why there is so much up-regulation in the vicinity of Gal4.</p>
+</section>
+
+<section>
+    <h1>Summary</h1>
+    <p>In summary, we have: </p>
+        <ul>
+        <li>Explored a yeast interactome from a transcription factor knockout experiment</li>
+        <li>Created a visual style using expression value as node color and with border width mapped to significance</li>
+        <li>Reviewed high expressing genes and their neighbors</li>
+        </ul>
+    <p>Finally, we can now share this this network in several ways.</p>
+	<aside class="notes" data-markdown>
+	Add speaker notes here...
+	</aside>
+</section>
+
+<section>
+	<h1>Sharing Results</h1>
+    <p>Cytoscape Web can generate publication-quality images from network views, and you can also share your Cytoscape Web workspace easily.</p>
+	<ul>
+        <li>Export as an image: <highlight>Data &rarr; Export &rarr; Network to Image...</highlight></li>
+        <li>Share workspace: In the bottom right of the <highlight>Network View Window</highlight>, click the <highlight>Share this network</highlight> button <img class="plain" src="share.png">.</li>
+        <li>Open in Cytoscape desktop: In the bottom right of the <highlight>Network View Window</highlight>, click the <highlight>Open in Cytoscape Desktop</highlight> button <img class="plain" src="open-cs.png">.</li>
+	</ul>
+</section>
+                
+<!-- THIS IS WHERE YOUR CONTENT ENDS -->
+<!-- ========================================================== -->
+
+			</div>
+		</div>
+
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-155159-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script>
+	Reveal.addEventListener( 'ready', function() {
+	if(!window.navigator.userAgent.includes('CyBrowser')){
+		var divs = document.getElementsByClassName("cybrowser")
+		for (var i=0;i<divs.length;i++){
+			divs[i].style.display = "none";
+		}
+	} else {
+		var divs = document.getElementsByClassName("not-cybrowser")
+		for (var i=0;i<divs.length;i++){
+			divs[i].style.display = "none";
+		}
+	}
+});
+</script>  
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				controls: true,
+				progress: true,
+				slideNumber: false,
+				touch: true,
+				fragments: true,
+				help: true,
+				showNotes: false,
+				previewLinks: false,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				width: 1200,
+				height: 860,
+				autoSlide: 0,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+				{ src: '../../plugin/markdown/marked.js' },
+				{ src: '../../plugin/markdown/markdown.js' },
+				{ src: '../../plugin/markdown/zoom.js', async: true, condition: function(){ return !!document.body.classList; } },
+				{ src: '../../plugin/zoom-js/zoom.js', async: true, condition: function(){ return !!document.body.classList; } },
+				{ src: '../../plugin/notes/notes.js', async: true },
+				{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: '../../plugin/external/external.js', condition: function() { return !!document.querySelector( '[data-external]' ); } }
+				]
+				});
+			</script>
+		</body>
+	</html>
